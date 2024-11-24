@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <Button colorScheme="teal">Click me</Button>
+      <Button colorScheme="black">Click me</Button>
     </>
   )
 }
