@@ -6,11 +6,11 @@ import { Link, useParams } from "react-router-dom";
 import useGetUserByUsername from "../../hooks/useGetUserByUsername";
 
 const Profilepage = () => {
-  const { username } = useParams();
-  console.log("username is :" + username)
-  const {isLoading, userProfile} = useGetUserByUsername(username)
-  const userNotFound = !isLoading && !userProfile
-  if (userNotFound) return (<div>User not found.<Link to={"/"}>Go home</Link></div>)
+  // const { username } = useParams();
+  // console.log("username is :" + username)
+  // const {isLoading, userProfile} = useGetUserByUsername(username)
+  // const userNotFound = !isLoading && !userProfile
+  // if (userNotFound) return (<div>User not found.<Link to={"/"}>Go home</Link></div>)
 
   return (
     <Container maxW={"container.lg"}>
@@ -23,7 +23,8 @@ const Profilepage = () => {
         <div className="">
           <div className="flex items-center gap-4">
             <p className="font-semibold">
-              {userProfile.username}
+              {/* {userProfile.username } */}
+              roseprogrammer
             </p>
             <button className="bg-white rounded-sm text-black text-sm font-bold px-2 py-1">
               <span className="hidden md:block"> Edit Profile</span>
