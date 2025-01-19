@@ -1,41 +1,17 @@
-import { useEffect, useState } from "react";
 import { Container, Avatar } from "@chakra-ui/react";
 import ProfilePosts from "../../components/profileposts/ProfilePosts";
 import ProfileTab from "../../components/Profile/ProfileTab";
 import { FiEdit } from "react-icons/fi";
-import { useParams } from "react-router-dom";
-import { firestore } from "../../firebase/firebase";
-import { doc, getDocs, collection, where, query } from "firebase/firestore";
+import { Link, useParams } from "react-router-dom";
+import useGetUserByUsername from "../../hooks/useGetUserByUsername";
 
 const Profilepage = () => {
   const { username } = useParams();
-  const [userProfile, setUserProfile] = useState(null);
+  console.log("username is :" + username)
+  const {isLoading, userProfile} = useGetUserByUsername(username)
+  const userNotFound = !isLoading && !userProfile
+  if (userNotFound) return (<div>User not found.<Link to={"/"}>Go home</Link></div>)
 
-  useEffect(() => {
-    console.log(username);
-    if (username) {
-      const fetchUserProfile = async () => {
-        const usersRef = collection(firestore, "users");
-        const q = query(usersRef, where("username", "==", username));
-        const qData = await getDocs(q);
-        if (!qData.empty) {
-          console.log("doc exists" + qData);
-          qData.forEach((doc) => {
-            console.log("Document ID:", doc.id); 
-            console.log("Document data:", doc.data());
-            setUserProfile(doc.data())
-          });
-        } else {
-          console.log("No document found for the username:", username);
-          setUserProfile(null);
-        }
-      };
-      fetchUserProfile();
-    }
-  }, [username]);
-  if (!userProfile) {
-    return <div>Loading...</div>;
-  }
   return (
     <Container maxW={"container.lg"}>
       <div className="flex items-center gap-10 md:gap-20 md:pl-12 pt-9 md:pt-24">
@@ -47,7 +23,7 @@ const Profilepage = () => {
         <div className="">
           <div className="flex items-center gap-4">
             <p className="font-semibold">
-              {userProfile.username || "roseprogrammer"}
+              {userProfile.username}
             </p>
             <button className="bg-white rounded-sm text-black text-sm font-bold px-2 py-1">
               <span className="hidden md:block"> Edit Profile</span>

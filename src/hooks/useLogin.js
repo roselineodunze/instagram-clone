@@ -1,13 +1,6 @@
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../firebase/firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import useShowToast from "./useShowToast";
 import useAuthStore from "../store/authStore";
 
@@ -24,17 +17,17 @@ const useLogin = () => {
       return;
     }
 
-
     try {
       const userCred = await signInWithEmailAndPassword(
         data.email,
         data.password
       );
 
-      if (!userCred){
+      if (!userCred) {
         await showToast({
           title: "Error.",
-          description: "There was an error. Please try again or sign in with google.",
+          description:
+            "There was an error. Please try again or sign in with google.",
           status: "error",
         });
       }
@@ -52,12 +45,13 @@ const useLogin = () => {
           description: "You have been logged in successfully.",
           status: "success",
         });
-      } 
+      }
     } catch (error) {
       console.log(error);
       await showToast({
         title: "Error.",
-        description: error?.message || "Something went wrong. Please try again.",
+        description:
+          error?.message || "Something went wrong. Please try again.",
         status: "error",
       });
     }

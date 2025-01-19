@@ -15,7 +15,7 @@ const SuggestedUsers = () => {
   return (
     <div className="pr-7 py-8 overflow-hidden h-screen">
       <div className="flex w-full items-center justify-between gap-4 mb-5">
-        <Link to={authUser.username}>
+        <Link to={ "/" + authUser.username}>
           <Avatar src={authUser.profilePicURL} size={"md"} />
         </Link>
         <div className="flex-grow">
