@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input, Button, InputRightElement, InputGroup } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import useLogin from "../../hooks/uselogin";
+import useLogin from "../../hooks/useLogin";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
