@@ -5,10 +5,12 @@ import PageLayout from "./layouts/PageLayout";
 import Profilepage from "./pages/userprofile/ProfilePage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/firebase";
+import { useEffect } from "react";
 
 
 function App() {
   const [authUser] = useAuthState(auth);
+  
 
   return (
     <>
