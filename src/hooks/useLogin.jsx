@@ -35,9 +35,7 @@ const useLogin = () => {
       if (userCred) {
         const userRef = doc(firestore, "users", userCred.user.uid);
         const userDoc = await getDoc(userRef);
-        console.log("Logged-in user:", userDoc);
         const loggedInUser = userDoc.data();
-        console.log("Logged-in user:", loggedInUser);
         localStorage.setItem("user-info", JSON.stringify(loggedInUser));
         loginUser(loggedInUser);
         await showToast({

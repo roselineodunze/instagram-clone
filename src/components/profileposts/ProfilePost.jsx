@@ -8,16 +8,14 @@ import {
   InputGroup,
   Input,
   Button,
-} from "@chakra-ui/react";
-import { FaHeart, FaComment } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { FaHeart, FaComment } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { CommentLogo, UnlikeLogo } from "../../assets/constants";
 import { Link as RouterLink } from "react-router-dom";
 import Comment from "../Comment/Comment";
@@ -68,9 +66,9 @@ const ProfilePost = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalCloseButton  />
+          <ModalCloseButton />
           <ModalBody bg={"black"}>
-            <div className="flex gap-10 w-[90%] sm:w-[80%] md:h-auto h-[100vh] md:w-full mx-auto p-3">
+            <div className="flex gap-10 w-[90%] sm:w-[80%] md:h-auto  h-[100vh] md:w-full mx-auto p-3">
               <div className="overflow-hidden flex-[0.5] rounded-sm hidden md:block">
                 <Image src="/img1.png" />
               </div>
@@ -96,12 +94,9 @@ const ProfilePost = () => {
                     <Comment />
                     <Comment />
                     <Comment />
-                    
-
-
                   </div>
                 </div>
-                <div className="flex-1 md:py-0 py-3"> 
+                <div className="flex-1 md:py-0 py-3">
                   <div className="flex gap-2 mb-1">
                     <UnlikeLogo />
                     <CommentLogo />

@@ -39,7 +39,7 @@ const Sidebar = () => {
   const {handlelogout, loading, error} = useLogout()
 
   return (
-    <div className="h-screen px-2 md:px-4 sticky top-0 left-0">
+    <div className="h-full px-2 md:px-4 sticky top-0 left-0">
       <div className="flex flex-col w-full h-full py-8 gap-12">
         <Link
           to={"/"}

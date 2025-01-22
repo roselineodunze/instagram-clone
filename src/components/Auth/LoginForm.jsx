@@ -61,6 +61,7 @@ const LoginForm = () => {
         width="100%"
         mb={8}
         onClick={() => login(authData)}
+        isLoading={loading}
       >
         Login
       </Button>

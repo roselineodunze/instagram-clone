@@ -13,7 +13,7 @@ import useAuthStore from "../store/authStore";
 
 const useSignupWIthEmailAndPassword = () => {
   const { showToast } = useShowToast();
-  const loginUser = useAuthStore((state) => state.login);
+  const {login} = useAuthStore();
 
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -65,7 +65,7 @@ const useSignupWIthEmailAndPassword = () => {
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));
 
-        loginUser(userDoc);
+        login(userDoc);
 
         await showToast({
           title: "Account created successfully.",

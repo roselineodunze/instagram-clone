@@ -4,16 +4,16 @@ import useShowToast from "./useShowToast";
 import useAuthStore from "../store/authStore";
 
 const useLogout = () => {
-  const [ signOut, loading, error ] = useSignOut(auth);
+  const [signOut, loading, error] = useSignOut(auth);
   const { showToast } = useShowToast();
-  const logoutUser = useAuthStore((state) => state.logout);
+  const { logout } = useAuthStore();
 
   const handlelogout = async () => {
     try {
       await signOut();
       localStorage.removeItem("user-info");
       console.log("logged out");
-      logoutUser();
+      logout();
     } catch (error) {
       console.log(error);
       showToast({

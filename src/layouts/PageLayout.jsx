@@ -12,16 +12,16 @@ const PageLayout = ({ children }) => {
   const renderNavbar = !user && !loading && pathname !== "/auth";
 
   return (
-    <div className={`flex ${renderNavbar ? 'flex-col' : ''}`}>
+    <div className={`h-screen flex ${renderNavbar ? "flex-col" : ""}`}>
       {/* sidebar */}
       {renderSidebar ? (
-        <div className="w-[70px] md:w-[240px]">
+        <div className="w-[70px] md:w-[240px] h-full">
           <Sidebar />
         </div>
       ) : null}
 
       {/* navbar */}
-      {renderNavbar ? <Navbar/> : null}
+      {renderNavbar ? <Navbar /> : null}
 
       <div className="flex-1 w-[calc 100% - 70px] md:w-[calc 100% - 240px] overflow-x-hidden">
         {children}
