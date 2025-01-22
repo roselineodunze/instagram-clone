@@ -33,14 +33,14 @@ const Sidebar = () => {
     {
       icon: <Avatar src="/profilepic.png" size={"sm"} name="roseline" />,
       text: "Profile",
-      link: "/:username"
+      link: "/:username",
     },
   ];
-  const {handlelogout, loading, error} = useLogout()
+  const { handlelogout, loading, error } = useLogout();
 
   return (
     <div className="h-full px-2 md:px-4 sticky top-0 left-0">
-      <div className="flex flex-col w-full h-full py-8 gap-12">
+      <div className="flex flex-col w-full h-full py-4 md:py-8 gap-6 md:gap-12">
         <Link
           to={"/"}
           as={RouterLink}
@@ -84,7 +84,7 @@ const Sidebar = () => {
                 borderRadius={6}
                 p={2}
                 width={{ base: 10, md: "full" }}
-                justifyContent={{base:"center", md:"flex-start"}}
+                justifyContent={{ base: "center", md: "flex-start" }}
               >
                 {item.icon}
                 <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
@@ -93,29 +93,35 @@ const Sidebar = () => {
           ))}
         </div>
         <div>
-        <Tooltip
-              hasArrow
-              label="Logout"
-              placement="right"
-              openDelay={500}
-              display={{ base: "block", md: "none" }}
+          <Tooltip
+            hasArrow
+            label="Logout"
+            placement="right"
+            openDelay={500}
+            display={{ base: "block", md: "none" }}
+          >
+            <Flex
+              onClick={handlelogout}
+              display={"flex"}
+              cursor="pointer"
+              alignItems={"center"}
+              gap={4}
+              _hover={{ bg: "whiteAlpha.400" }}
+              borderRadius={6}
+              p={2}
+              width={{ base: 10, md: "full" }}
             >
-              <Flex
-                onClick={handlelogout}
-                display={"flex"}
-                cursor="pointer"
-                alignItems={"center"}
-                gap={4}
-                _hover={{ bg: "whiteAlpha.400" }}
-                borderRadius={6}
-                p={2}
-                width={{ base: 10, md: "full" }}
+              <BiLogOut size={25} />
+              <Button
+                display={{ base: "none", md: "block" }}
+                variant={"ghost"}
+                _hover={{ bg: "transparent" }}
+                isLoading={loading}
               >
-                <BiLogOut size={25}/>
-                <Button display={{ base: "none", md: "block" }}
-                variant={"ghost"} _hover={{bg: "transparent"}} isLoading={loading}>Logout</Button>
-              </Flex>
-            </Tooltip>
+                Logout
+              </Button>
+            </Flex>
+          </Tooltip>
         </div>
       </div>
     </div>
