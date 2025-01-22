@@ -15,7 +15,7 @@ const PageLayout = ({ children }) => {
     <div className={`h-screen flex ${renderNavbar ? "flex-col" : ""}`}>
       {/* sidebar */}
       {renderSidebar ? (
-        <div className="w-[70px] md:w-[240px] h-full overflow-y-hidden">
+        <div className="w-[70px] md:w-[240px] h-full">
           <Sidebar />
         </div>
       ) : null}
