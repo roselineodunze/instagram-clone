@@ -40,57 +40,59 @@ const Sidebar = () => {
 
   return (
     <div className="h-full px-2 md:px-4 sticky top-0 left-0">
-      <div className="flex flex-col w-full h-full py-4 md:py-8 gap-6 md:gap-12">
-        <Link
-          to={"/"}
-          as={RouterLink}
-          pl={2}
-          display={{ base: "none", md: "block" }}
-          cursor="pointer"
-        >
-          <InstagramLogo />
-        </Link>
-        <Link
-          to={"/"}
-          as={RouterLink}
-          p={2}
-          display={{ base: "flex", md: "none" }}
-          cursor="pointer"
-          width="100%"
-          _hover={{ bg: "whiteAlpha.400" }}
-          borderRadius={6}
-          w={10}
-        >
-          <InstagramMobileLogo />
-        </Link>
-        <div className="flex flex-col gap-5 h-full cursor-pointer">
-          {menuLinks.map((item, index) => (
-            <Tooltip
-              key={index}
-              hasArrow
-              label={item.text}
-              placement="right"
-              openDelay={500}
-              display={{ base: "block", md: "none" }}
-            >
-              <Link
-                to={item.link || "#"}
-                as={RouterLink}
-                display={"flex"}
-                cursor="pointer"
-                alignItems={"center"}
-                gap={4}
-                _hover={{ bg: "whiteAlpha.400" }}
-                borderRadius={6}
-                p={2}
-                width={{ base: 10, md: "full" }}
-                justifyContent={{ base: "center", md: "flex-start" }}
+      <div className="flex flex-col w-full h-full py-4 md:py-8 justify-between">
+        <div className="flex flex-col gap-12">
+          <Link
+            to={"/"}
+            as={RouterLink}
+            pl={2}
+            display={{ base: "none", md: "block" }}
+            cursor="pointer"
+          >
+            <InstagramLogo />
+          </Link>
+          <Link
+            to={"/"}
+            as={RouterLink}
+            p={2}
+            display={{ base: "flex", md: "none" }}
+            cursor="pointer"
+            width="100%"
+            _hover={{ bg: "whiteAlpha.400" }}
+            borderRadius={6}
+            w={10}
+          >
+            <InstagramMobileLogo />
+          </Link>
+          <div className="flex flex-col gap-5 h-full cursor-pointer">
+            {menuLinks.map((item, index) => (
+              <Tooltip
+                key={index}
+                hasArrow
+                label={item.text}
+                placement="right"
+                openDelay={500}
+                display={{ base: "block", md: "none" }}
               >
-                {item.icon}
-                <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
-              </Link>
-            </Tooltip>
-          ))}
+                <Link
+                  to={item.link || "#"}
+                  as={RouterLink}
+                  display={"flex"}
+                  cursor="pointer"
+                  alignItems={"center"}
+                  gap={4}
+                  _hover={{ bg: "whiteAlpha.400" }}
+                  borderRadius={6}
+                  p={2}
+                  width={{ base: 10, md: "full" }}
+                  justifyContent={{ base: "center", md: "flex-start" }}
+                >
+                  {item.icon}
+                  <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
+                </Link>
+              </Tooltip>
+            ))}
+          </div>
         </div>
         <div>
           <Tooltip
