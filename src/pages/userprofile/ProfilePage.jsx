@@ -12,6 +12,7 @@ import useGetUserByUsername from "../../hooks/useGetUserByUsername";
 import useAuthStore from "../../store/authStore";
 import EditProfile from "../../components/Profile/EditProfile";
 import { useNavigate } from "react-router-dom";
+import useFollowUser from "../../hooks/useFollowUser";
 
 
 const Profilepage = () => {
@@ -20,6 +21,8 @@ const Profilepage = () => {
   const { username } = useParams();
   const navigate = useNavigate();
   const { isLoading, userProfile } = useGetUserByUsername(username);
+  const {isFollowing, handleFollowUser} = useFollowUser(userProfile?.uid)
+
   if (!user) {
     return navigate("/auth");
   }
@@ -53,8 +56,8 @@ const Profilepage = () => {
               </button>
             )}
             {!showEditprofile && (
-              <button className="bg-blue-500 rounded-sm text-white text-sm font-bold px-2 py-1">
-                <span> Follow</span>
+              <button onClick={handleFollowUser} className="bg-blue-500 rounded-sm text-white text-sm font-bold px-2 py-1">
+                <span> {isFollowing ? "Unfollow" : "Follow"}</span>
               </button>
             )}
           </div>
