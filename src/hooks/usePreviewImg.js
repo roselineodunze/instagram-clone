@@ -3,6 +3,7 @@ import useShowToast from "./useShowToast";
 
 const usePreviewImg = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [remoteFile, setRemoteFile] = useState(null)
   const maxFileSize = 5 * 1024 * 1024;
   const { showToast } = useShowToast();
 
@@ -18,9 +19,12 @@ const usePreviewImg = () => {
         setSelectedFile(null);
         return;
       }
+      setRemoteFile(file)
+      
       const reader = new FileReader()
       reader.onloadend = () => {
         setSelectedFile(reader.result)
+        console.log(selectedFile)
       }
       reader.readAsDataURL(file)
     } else {
@@ -33,7 +37,7 @@ const usePreviewImg = () => {
     }
   };
 
-  return {selectedFile, handleImageChange, setSelectedFile};
+  return {selectedFile, handleImageChange, setSelectedFile, remoteFile};
 };
 
 export default usePreviewImg;

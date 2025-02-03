@@ -10,14 +10,17 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { CommentLogo, UnlikeLogo } from "../../assets/constants";
+import useGetUserById from "../../hooks/useGetUserById"
 
-const FeedPost = ({ username, avatar, comment }) => {
+const FeedPost = ({ post }) => {
+  const {userProfile} = useGetUserById(post.createdBy)
+  if (!userProfile) return
   return (
     <div className="mb-7">
       <div className="flex gap-3 items-center">
-        <Avatar src={avatar} size={"sm"} name="roseline" />
+        <Avatar src={userProfile.profilePicURL} size={"sm"} name="roseline" />
         <Box w="full">
-          <p className="font-bold text-sm">{username} .1m</p>
+          <p className="font-bold text-sm">{userProfile.username} .1m</p>
         </Box>
         <Link
           to={"#"}
@@ -31,20 +34,20 @@ const FeedPost = ({ username, avatar, comment }) => {
           <p className="text-blue-400 hover:text-white ">Unfollow</p>
         </Link>
       </div>
-      <div className="overflow-hidden rounded-[4px] my-2">
-        <Image src={avatar} />
+      <div className="rounded-[4px] my-2 h-full w-full">
+        <Image src={post.imageURL} className="h-full w-full" w={"100%"} />
       </div>
       <div className="flex gap-2 my-4">
         <UnlikeLogo />
         <CommentLogo />
       </div>
       <div className="">
-        <p className="font-semibold">1000 likes</p>
+        <p className="font-semibold">{post.likes.length} likes</p>
         <div className="flex gap-1 items-center my-2">
-          <p className="font-bold text-sm">{username}</p>
-          <p className="">{comment}</p>
+          <p className="font-bold text-sm">{userProfile.username}</p>
+          <p className="">{post.caption}</p>
         </div>
-        <p className="font-light mb-3">View all 1,123 comments</p>
+        <p className="font-light mb-3">View all {post.comments.length} comments</p>
         <InputGroup size="md">
           <Input placeholder="Add a comment..." p={0} variant="flushed" />
           <InputRightElement>

@@ -1,9 +1,11 @@
 import { Container, SkeletonCircle, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import FeedPost from "./FeedPost";
+import useGetFeedPosts from "../../hooks/useGetFeedPosts";
 
 const FeedPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const {posts} = useGetFeedPosts()
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,25 +25,22 @@ const FeedPosts = () => {
               <Skeleton height="15px" width={"15%"} />
             </div>
             <div className="w-full my-2">
-              <Skeleton height={{md:"600px", base:"400px"}} width={"100%"} />
+              <Skeleton
+                height={{ md: "600px", base: "400px" }}
+                width={"100%"}
+              />
             </div>
           </div>
         ))}
 
-      {!isLoading && (
-        <>
+        {posts.map((post) => (
           <FeedPost
-            username="roselineodu"
-            avatar="/img1.png"
-            comment="Feeling Good 🥰"
-          />
-          <FeedPost
-            username="romanreigns"
-            avatar="/img4.png"
-            comment="Watching the sunset ⛅️"
-          />
-        </>
-      )}
+          key={post.id}
+          post={post}
+        />
+        ))}
+
+        
     </Container>
   );
 };

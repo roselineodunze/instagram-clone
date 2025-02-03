@@ -41,7 +41,7 @@ const useFollowUser = (userId) => {
             })
             setUserprofile({
                 ...userProfile,
-                following: userProfile.following.filter(id => id !== userId)
+                followers: userProfile.followers.filter(id => id !== user.uid)
             })
             localStorage.setItem("user-info", JSON.stringify({
                 ...user,
@@ -56,7 +56,7 @@ const useFollowUser = (userId) => {
             })
             setUserprofile({
                 ...userProfile,
-                following: [...userProfile.following, userId]
+                followers: [...userProfile.followers, user.uid]
             })
             localStorage.setItem("user-info", JSON.stringify({
                 ...user,

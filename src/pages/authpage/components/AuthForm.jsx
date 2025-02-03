@@ -17,6 +17,7 @@ const AuthForm = ({ isLogin }) => {
   //   }
   //   navigate("/")
   // }
+  
 
   return (
     <div className="border-0 sm:border border-gray-800 p-5 max-w-[350px] rounded-md">

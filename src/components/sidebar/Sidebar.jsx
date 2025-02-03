@@ -6,10 +6,12 @@ import {
   SearchLogo,
   NotificationsLogo,
   CreatePostLogo,
-} from "../../../assets/constants";
+} from "../../assets/constants";
 import { AiFillHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
-import useLogout from "../../../hooks/useLogout";
+import useLogout from "../../hooks/useLogout";
+import SidebarItems from "./SidebarItems";
+
 
 const Sidebar = () => {
   const menuLinks = [
@@ -65,8 +67,7 @@ const Sidebar = () => {
             <InstagramMobileLogo />
           </Link>
           <div className="flex flex-col gap-5 h-full cursor-pointer">
-            {menuLinks.map((item, index) => (
-              <Tooltip
+              {/* <Tooltip
                 key={index}
                 hasArrow
                 label={item.text}
@@ -90,8 +91,8 @@ const Sidebar = () => {
                   {item.icon}
                   <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
                 </Link>
-              </Tooltip>
-            ))}
+              </Tooltip> */}
+              <SidebarItems/>
           </div>
         </div>
         <div>

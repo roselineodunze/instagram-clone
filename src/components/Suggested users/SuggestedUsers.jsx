@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SuggestedUser from "./SuggestedUser";
 import { Avatar, Box, Button } from "@chakra-ui/react";
 import useLogout from "../../hooks/useLogout";
 import useAuthStore from "../../store/authStore";
 import { Link } from "react-router-dom";
+import useGetSuggesstedUsers from "../../hooks/useGetSuggesstedUsers";
 
 const SuggestedUsers = () => {
   const { loading, handlelogout } = useLogout();
   const authUser = useAuthStore((state) => state.user);
+  const { suggestedUsers } = useGetSuggesstedUsers();
+
   if (!authUser) {
     return <div>Loading...</div>;
   }
@@ -15,7 +18,7 @@ const SuggestedUsers = () => {
   return (
     <div className="pr-7 py-8 overflow-hidden h-screen">
       <div className="flex w-full items-center justify-between gap-4 mb-5">
-        <Link to={ "/" + authUser.username}>
+        <Link to={"/" + authUser.username}>
           <Avatar src={authUser.profilePicURL} size={"md"} />
         </Link>
         <div className="flex-grow">
@@ -37,9 +40,9 @@ const SuggestedUsers = () => {
         <button className="font-bold text-sm">See All</button>
       </div>
       <div>
-        <SuggestedUser />
-        <SuggestedUser />
-        <SuggestedUser />
+        {suggestedUsers.map((user, i) => (
+          <SuggestedUser key={i} user={user} />
+        ))}
       </div>
     </div>
   );

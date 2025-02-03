@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 
 const ProfileTab = () => {
   return (
-    <div className="flex justify-center md:gap-16 gap-3 mt-20 mb-3">
+    <div className="flex justify-between w-[70%] md:w-[50%] gap-3 mx-auto mb-4">
         <div className="flex items-center gap-1 border-t-2 pt-3 border-white">
           <BsGrid3X3 size={22} />
           <p className="font-extrabold text-sm">POSTS</p>

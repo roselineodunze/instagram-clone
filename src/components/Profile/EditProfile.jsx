@@ -17,22 +17,26 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuthStore from "../../store/authStore";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import useEditProfile from "../../hooks/useEditProfile";
+import useUserProfileStore from "../../store/useUserProfileStore";
+
+
 
 const EditProfile = ({ isOpen, onClose }) => {
-  const { user } = useAuthStore();
   const fileRef = useRef(null);
-  const { selectedFile, handleImageChange, setSelectedFile } = usePreviewImg();
+  const { selectedFile, setSelectedFile, handleImageChange, remoteFile } = usePreviewImg();
+  const {userProfile} = useUserProfileStore()
   const [inputs, setInputs] = useState({
-    username: user.username,
-    fullname: user.fullname,
-    bio: user.bio,
+    username: userProfile.username,
+    fullname: userProfile.fullname,
+    bio: userProfile.bio,
   });
   const { handleProfileEdit } = useEditProfile();
-  console.log(selectedFile)
+
+  
 
   return (
     <>
@@ -59,7 +63,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size="xl"
-                        src={selectedFile || user.profilePictureURL}
+                        src={selectedFile || userProfile.profilePicURL}
                       >
                         <AvatarBadge
                           as={IconButton}
@@ -142,7 +146,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                       bg: "blue.500",
                     }}
                     onClick={() =>
-                      handleProfileEdit(inputs, setInputs, onClose)
+                      handleProfileEdit(inputs, setInputs, onClose, remoteFile)
                     }
                   >
                     Submit
