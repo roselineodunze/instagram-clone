@@ -1,15 +1,18 @@
-import React from "react";
-import useAuthStore from "../../store/authStore";
 import SearchUser from "./SearchUser";
 import CreatePost from "./CreatePost";
+import HomeItem from "./HomeItem";
+import Notifications from "./Notifications";
+import ProfileItem from "./ProfileItem";
 
 const SidebarItems = () => {
-  const { user } = useAuthStore();
   return (
     <>
-      <CreatePost />
-
+      <HomeItem />
       <SearchUser />
+      <Notifications />
+
+      <CreatePost />
+      <ProfileItem />
     </>
   );
 };

@@ -12,32 +12,7 @@ import { BiLogOut } from "react-icons/bi";
 import useLogout from "../../hooks/useLogout";
 import SidebarItems from "./SidebarItems";
 
-
 const Sidebar = () => {
-  const menuLinks = [
-    {
-      icon: <AiFillHome size={25} />,
-      text: "Home",
-      link: "/",
-    },
-    {
-      icon: <SearchLogo />,
-      text: "Search",
-    },
-    {
-      icon: <NotificationsLogo />,
-      text: "Notifications",
-    },
-    {
-      icon: <CreatePostLogo />,
-      text: "Create",
-    },
-    {
-      icon: <Avatar src="/profilepic.png" size={"sm"} name="roseline" />,
-      text: "Profile",
-      link: "/:username",
-    },
-  ];
   const { handlelogout, loading, error } = useLogout();
 
   return (
@@ -67,32 +42,7 @@ const Sidebar = () => {
             <InstagramMobileLogo />
           </Link>
           <div className="flex flex-col gap-5 h-full cursor-pointer">
-              {/* <Tooltip
-                key={index}
-                hasArrow
-                label={item.text}
-                placement="right"
-                openDelay={500}
-                display={{ base: "block", md: "none" }}
-              >
-                <Link
-                  to={item.link || "#"}
-                  as={RouterLink}
-                  display={"flex"}
-                  cursor="pointer"
-                  alignItems={"center"}
-                  gap={4}
-                  _hover={{ bg: "whiteAlpha.400" }}
-                  borderRadius={6}
-                  p={2}
-                  width={{ base: 10, md: "full" }}
-                  justifyContent={{ base: "center", md: "flex-start" }}
-                >
-                  {item.icon}
-                  <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
-                </Link>
-              </Tooltip> */}
-              <SidebarItems/>
+            <SidebarItems />
           </div>
         </div>
         <div>

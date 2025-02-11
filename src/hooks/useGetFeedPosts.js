@@ -12,7 +12,7 @@ const useGetFeedPosts = () => {
     const {user} = useAuthStore()
 
     useEffect(() => {
-        if (user.following.length === 0){
+        if (user?.following.length === 0){
             setPosts([])
             return
         } 

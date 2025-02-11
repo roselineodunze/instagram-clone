@@ -2,7 +2,7 @@ import React from "react";
 
 export const timeAgo = (timestamp) => {
   const now = Date.now();
-  const secondAgo = Math.floor((now * timestamp) / 1000);
+  const secondAgo = Math.floor((now - timestamp) / 1000);
   if (secondAgo < 60) {
     return `${secondAgo}s ago`;
   } else if (secondAgo < 3600) {

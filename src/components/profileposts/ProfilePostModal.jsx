@@ -28,11 +28,12 @@ import {
   arrayRemove,
   deleteDoc,
   doc,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase.js";
 import useAuthStore from "../../store/authStore.js";
+import { timeAgo } from "../../utils/timeAgo.js";
+
 
 const ProfilePostModal = ({ isOpen, onClose, post }) => {
   const { userProfile, setUserprofile } = useUserProfileStore();
@@ -42,7 +43,8 @@ const ProfilePostModal = ({ isOpen, onClose, post }) => {
   const { createComment } = useCreateComment();
   const { isLiked, handleLike } = useAddLikes(post.id);
   const { user } = useAuthStore();
-  const commentInputRef = useRef(null)
+  const commentInputRef = useRef(null);
+  const date = timeAgo(post.createdAt);
 
   const handleDeletePost = async () => {
     if (!window.confirm("Are you sure you want to delete this post")) return;
@@ -105,7 +107,7 @@ const ProfilePostModal = ({ isOpen, onClose, post }) => {
               <div className="flex flex-grow flex-col max-w-[95vw] justify-between min-h-[70vh]">
                 <div className="w-full">
                   <div className="flex items-center justify-between pb-3 border-b gap-2 mb-5">
-                    <Avatar src={userProfile?.imageURL} size={"md"} />
+                    <Avatar src={userProfile?.profilePicURL} size={"md"} />
                     <div className="flex-grow">
                       <p className="font-bold text-sm">
                         {userProfile.username}
@@ -116,6 +118,18 @@ const ProfilePostModal = ({ isOpen, onClose, post }) => {
                     </button>
                   </div>
                   <div className="flex flex-col gap-2 pb-2 overflow-y-auto max-h-[70%]">
+                    {post.caption && (
+                      <div className="flex items-center justify-between gap-2">
+                        <Avatar src={userProfile.profilePicURL} size={"md"} />
+                        <div className="flex-grow">
+                          <p className="font-bold text-sm">
+                            {userProfile.username}{" "}
+                            <span className="font-medium">{post.caption}</span>
+                          </p>
+                          <p className="text-sm">{date}</p>
+                        </div>
+                      </div>
+                    )}
                     {post.comments?.length === 0 && (
                       <p className="w-full text-center mt-5 text-gray-300 text-sm">
                         No comments yet. 📖
@@ -131,11 +145,13 @@ const ProfilePostModal = ({ isOpen, onClose, post }) => {
                     <button onClick={handleLike}>
                       {isLiked ? <UnlikeLogo /> : <FaRegHeart size={24} />}
                     </button>
-                    <button onClick={() => {
-                      if (commentInputRef.current) {
-                        commentInputRef.current.focus();
-                      }
-                    }}>
+                    <button
+                      onClick={() => {
+                        if (commentInputRef.current) {
+                          commentInputRef.current.focus();
+                        }
+                      }}
+                    >
                       <CommentLogo />
                     </button>
                   </div>
