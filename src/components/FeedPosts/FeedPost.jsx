@@ -10,11 +10,11 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { CommentLogo, UnlikeLogo } from "../../assets/constants";
-import useGetUserById from "../../hooks/useGetUserById"
+import useGetUserById from "../../hooks/useGetUserById";
 
 const FeedPost = ({ post }) => {
-  const {userProfile} = useGetUserById(post.createdBy)
-  if (!userProfile) return
+  const { userProfile } = useGetUserById(post.createdBy);
+  if (!userProfile) return;
   return (
     <div className="mb-7">
       <div className="flex gap-3 items-center">
@@ -34,9 +34,25 @@ const FeedPost = ({ post }) => {
           <p className="text-blue-400 hover:text-white ">Unfollow</p>
         </Link>
       </div>
-      <div className="rounded-[4px] my-2 h-full w-full">
-        <Image src={post.imageURL} className="h-full w-full" w={"100%"} />
-      </div>
+      <Box
+        position="relative"
+        width="100%"
+        borderRadius="md"
+        overflow="hidden"
+        my={4}
+        aspectRatio={4 / 5}
+      >
+        <div>
+          <Image
+            src={post.imageURL}
+            alt="Feed image"
+            objectFit="cover"
+            width="100%"
+            height="100%"
+          />
+        </div>
+      </Box>
+
       <div className="flex gap-2 my-4">
         <UnlikeLogo />
         <CommentLogo />
@@ -47,7 +63,9 @@ const FeedPost = ({ post }) => {
           <p className="font-bold text-sm">{userProfile.username}</p>
           <p className="">{post.caption}</p>
         </div>
-        <p className="font-light mb-3">View all {post.comments.length} comments</p>
+        <p className="font-light mb-3">
+          View all {post.comments.length} comments
+        </p>
         <InputGroup size="md">
           <Input placeholder="Add a comment..." p={0} variant="flushed" />
           <InputRightElement>

@@ -20,13 +20,14 @@ const usePreviewImg = () => {
         return;
       }
       setRemoteFile(file)
+      console.log("remote file", file)
       
       const reader = new FileReader()
       reader.onloadend = () => {
         setSelectedFile(reader.result)
-        console.log(selectedFile)
       }
       reader.readAsDataURL(file)
+
     } else {
       showToast({
         title: "Error",

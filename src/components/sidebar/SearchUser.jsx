@@ -59,7 +59,10 @@ const SearchUser = () => {
           <ModalBody bg={"black"}>
             <div className="w-full mt-7 flex flex-col">
               <div className=" flex items-center">
-                <SearchLogo />
+                <button onClick={() => getUserProfile(username)}>
+                  {" "}
+                  <SearchLogo />
+                </button>
                 <input
                   placeholder="search username..."
                   value={username}
@@ -67,13 +70,12 @@ const SearchUser = () => {
                   className="border-none p-3 w-full flex-1 bg-transparent hover:border-none"
                   onChange={(e) => {
                     setUsername(e.target.value);
-                    getUserProfile(username);
                   }}
                 />
               </div>
               <div className="flex-1">
                 {isLoading && <p>Searching...</p>}
-                {user && <SearchResponse user={user} />}
+                {user && <SearchResponse user={user} onClose={onClose} />}
               </div>
             </div>
           </ModalBody>

@@ -1,15 +1,8 @@
-import {
-  Flex,
-  GridItem,
-  Image,
-  useDisclosure,
-  
-} from "@chakra-ui/react";
+import { Flex, GridItem, Image, useDisclosure } from "@chakra-ui/react";
 import { FaHeart, FaComment } from "react-icons/fa";
 
 import ProfilePostModal from "./ProfilePostModal.jsx";
 import useUserProfileStore from "../../store/useUserProfileStore";
-
 
 const ProfilePost = ({ post }) => {
   const { userProfile, delPost } = useUserProfileStore();
@@ -18,13 +11,13 @@ const ProfilePost = ({ post }) => {
 
   return (
     <>
-      <GridItem
+      <div
         cursor={"pointer"}
         overflow={"hidden"}
         border={"1px solid"}
-        borderColor={"whiteAlpha.300"}
-        position={"relative"}
-        aspectRatio={1 / 1}
+        // borderColor={"whiteAlpha.300"}
+        // position={"relative"}
+        // aspectRatio={1 / 1}
         onClick={onOpen}
       >
         <Flex
@@ -52,8 +45,20 @@ const ProfilePost = ({ post }) => {
             </div>
           </div>
         </Flex>
-        <Image src={post.imageURL} alt="Dan Abramov" />
-      </GridItem>
+          <div className="w-full h-full object-cover">
+            <img src={post.imageURL} height={"100%"} width={"100%"} className="object-cover"/>
+            {/* <Image
+              src={post.imageURL}
+              alt="Post Image"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            /> */}
+          </div>
+      </div>
       <ProfilePostModal isOpen={isOpen} onClose={onClose} post={post} />
     </>
   );

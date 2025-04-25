@@ -5,12 +5,11 @@ import PageLayout from "./layouts/PageLayout";
 import Profilepage from "./pages/userprofile/ProfilePage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/firebase";
-import { useEffect } from "react";
+import FunctionalityNotReady from "./pages/utilspages/FunctionalityNotReady";
 
 
 function App() {
   const [authUser] = useAuthState(auth);
-  
 
   return (
     <>
@@ -27,6 +26,10 @@ function App() {
           <Route
             path="/:username"
             element={<Profilepage />}
+          />
+          <Route
+            path="/:username/notifications"
+            element={authUser ? <FunctionalityNotReady /> : <Navigate to= "/auth"/>}
           />
         </Routes>
       </PageLayout>

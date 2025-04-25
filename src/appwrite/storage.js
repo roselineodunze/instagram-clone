@@ -5,12 +5,12 @@ const storageAPI = {};
 
 buckets.forEach((bucket) => {
   storageAPI[bucket.name] = {
-    // Upload file
+
     upload: async (file) => {
       try {
         const response = await storage.createFile(
-          bucket.id, // Bucket ID
-          ID.unique(), // File ID (unique ID or custom)
+          bucket.id,
+          ID.unique(),
 
           file // The file object to upload (e.g., file input)
         );
@@ -21,22 +21,21 @@ buckets.forEach((bucket) => {
       }
     },
 
-    upload2: async (fileId, file) => {
-      try {
-        const response = await storage.createFile(
-          bucket.id, // Bucket ID
-          fileId, // File ID (unique ID or custom)
+    // upload2: async (fileId, file) => {
+    //   try {
+    //     const response = await storage.createFile(
+    //       bucket.id, // Bucket ID
+    //       fileId, // File ID (unique ID or custom)
 
-          file // The file object to upload (e.g., file input)
-        );
-        return response;
-      } catch (error) {
-        console.error("Error uploading file:", error);
-        throw error;
-      }
-    },
+    //       file // The file object to upload (e.g., file input)
+    //     );
+    //     return response;
+    //   } catch (error) {
+    //     console.error("Error uploading file:", error);
+    //     throw error;
+    //   }
+    // },
 
-    // Get file by ID
     get: async (fileId) => {
       try {
         const response = await storage.getFileView(bucket.id, fileId);
@@ -47,22 +46,20 @@ buckets.forEach((bucket) => {
       }
     },
 
-    // Delete file by ID
     delete: async (fileId) => {
       try {
         await storage.deleteFile(bucket.id, fileId);
-        return { success: true }; // Return success message
+        return { success: true };
       } catch (error) {
         console.error("Error deleting file:", error);
         throw error;
       }
     },
 
-    // List files (optional)
     list: async (queries = []) => {
       try {
         const response = await storage.listFiles(bucket.id, queries);
-        return response.files; // Return list of files
+        return response.files;
       } catch (error) {
         console.error("Error listing files:", error);
         throw error;

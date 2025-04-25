@@ -8,6 +8,7 @@ import useAuthStore from "../../store/authStore";
 import EditProfile from "../../components/Profile/EditProfile";
 import { useNavigate } from "react-router-dom";
 import useFollowUser from "../../hooks/useFollowUser";
+import Loader from "../../components/LoadingAnimation";
 
 const Profilepage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,7 +21,7 @@ const Profilepage = () => {
   if (!user) {
     return navigate("/auth");
   }
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader/>;
   const userNotFound = !userProfile;
   if (userNotFound)
     return (

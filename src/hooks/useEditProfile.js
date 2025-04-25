@@ -7,29 +7,22 @@ import useAuthStore from "../store/authStore";
 import { storageAPI } from "../appwrite/storage";
 import usePreviewImg from "./usePreviewImg";
 
-
 const useEditProfile = () => {
   const navigate = useNavigate();
   const { setUserprofile, userProfile } = useUserProfileStore();
   const { showToast } = useShowToast();
-  const {  setSelectedFile } = usePreviewImg();
+  const { setSelectedFile } = usePreviewImg();
 
-  const { login } = useAuthStore();
+  const { login, user: authUser } = useAuthStore();
 
   const handleProfilePicUpload = async (profilePic) => {
     if (!profilePic) return null;
-    console.log(profilePic);
+
+    const previousProfilePicURL = authUser.profilePicURL
 
     try {
-      const files = await storageAPI.profilePictures.list();
-      const existingFile = files.find((file) => file.$id === userProfile.uid);
-      if (existingFile) {
-        await storageAPI.profilePictures.delete(userProfile.uid);
-      }
-      const response = await storageAPI.profilePictures.upload2(
-        userProfile.uid,
-        profilePic
-      );
+      const response = await storageAPI.profilePictures.upload(profilePic);
+      console.log("Profile pic uploaded", response)
 
       const profilePicURL = `${
         import.meta.env.VITE_APPWRITE_ENDPOINT
@@ -38,11 +31,24 @@ const useEditProfile = () => {
       }/files/${response.$id}/view?project=${
         import.meta.env.VITE_APPWRITE_PROJECT_ID
       }`;
-      setSelectedFile(null)
-      console.log("pic uploaded");
-      
+      setSelectedFile(null);
+
+      // DELETE PREVIOUS PROFILE PICTURE TO CLEAR UP SPACE IN STORAGE
+      const previousProfilePicId = previousProfilePicURL.match(/files\/(.*?)\/view/)[1];
+
+      const profilePictureList = await storageAPI.profilePictures.list();
+      const existingFile = profilePictureList.find(
+        (file) => file.$id === previousProfilePicId
+      );
+      if (existingFile) {
+        console.log("file exists")
+        await storageAPI.profilePictures.delete(previousProfilePicId);
+        console.log("EXISTING PIC DELETED");
+
+      }
 
       return profilePicURL;
+      
     } catch (error) {
       console.error("Profile picture upload error:", error);
       throw new Error("Failed to upload profile picture");
@@ -84,12 +90,12 @@ const useEditProfile = () => {
     navigate(`/${userData.username}`);
   };
 
-  const handleProfileEdit = async (inputs, setInputs, onClose, profilePic) => {
+  const handleProfileEdit = async (inputs, setInputs, onClose, newProfilePic) => {
     try {
       // Step 1: Handle profile picture upload if exists
       let updatedInputs = { ...inputs };
-      if (profilePic) {
-        const profilePicURL = await handleProfilePicUpload(profilePic);
+      if (newProfilePic) {
+        const profilePicURL = await handleProfilePicUpload(newProfilePic);
         if (profilePicURL) {
           updatedInputs = {
             ...inputs,

@@ -18,7 +18,6 @@ import {
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import useAuthStore from "../../store/authStore";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import useEditProfile from "../../hooks/useEditProfile";
 import useUserProfileStore from "../../store/useUserProfileStore";
@@ -27,7 +26,7 @@ import useUserProfileStore from "../../store/useUserProfileStore";
 
 const EditProfile = ({ isOpen, onClose }) => {
   const fileRef = useRef(null);
-  const { selectedFile, setSelectedFile, handleImageChange, remoteFile } = usePreviewImg();
+  const { selectedFile, handleImageChange, remoteFile } = usePreviewImg();
   const {userProfile} = useUserProfileStore()
   const [inputs, setInputs] = useState({
     username: userProfile.username,

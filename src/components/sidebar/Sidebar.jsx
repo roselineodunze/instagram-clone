@@ -1,13 +1,9 @@
-import { Avatar, Box, Link, Tooltip, Flex, Button } from "@chakra-ui/react";
+import { Link, Tooltip, Flex, Button } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import {
   InstagramLogo,
   InstagramMobileLogo,
-  SearchLogo,
-  NotificationsLogo,
-  CreatePostLogo,
 } from "../../assets/constants";
-import { AiFillHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import useLogout from "../../hooks/useLogout";
 import SidebarItems from "./SidebarItems";
